@@ -25,8 +25,12 @@ public class ProductoService {
 
     @Transactional
     public ResponseMessage saveProducto(Producto producto) {
-        productoRepository.save(producto);
-        return new ResponseMessage(200, "Producto grabado correctamente");
+        if (producto.getPrecio() > 0) {
+            productoRepository.save(producto);
+            return new ResponseMessage(200, "Producto grabado correctamente");
+        }else{
+            return new ResponseMessage(200, "El Precio del roducto "+producto.getNombre()+" debe ser mayor a cero");
+        }
     }
 
     @Transactional

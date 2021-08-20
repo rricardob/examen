@@ -20,6 +20,11 @@ public class SucursalController {
     @Autowired
     private SucursalService sucursalService;
 
+    @GetMapping("listarSucursalById/{codSucursal}")
+    public ResponseEntity<Sucursal> findById(@PathVariable String codSucursal){
+        return ok(sucursalService.findByIdSucursal(codSucursal));
+    }
+
     @GetMapping("listarSucursales")
     public ResponseEntity<List<Sucursal>> listSucursal() {
         return ok(sucursalService.listSucursal());

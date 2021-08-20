@@ -24,6 +24,10 @@ public class SucursalService {
         return sucursalRepository.findAll();
     }
 
+    public Sucursal findByIdSucursal(String idSucursal){
+        return sucursalRepository.findById(idSucursal).orElse(null);
+    }
+
     @Transactional
     public ResponseMessage saveSucursal(Sucursal sucursal) {
         sucursalRepository.save(sucursal);
