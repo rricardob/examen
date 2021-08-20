@@ -1,9 +1,7 @@
 package com.valtx.examen.service;
 
-import com.sun.tools.doclint.Entity;
 import com.valtx.examen.dto.response.ResponseMessage;
 import com.valtx.examen.entity.Producto;
-import com.valtx.examen.entity.Sucursal;
 import com.valtx.examen.repo.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
