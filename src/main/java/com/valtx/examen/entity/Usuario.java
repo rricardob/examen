@@ -13,10 +13,10 @@ public class Usuario {
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "user", nullable = false)
+    @Column(name = "`user`", nullable = false)
     private String user;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "`password`", nullable = false)
     private String password;
 
     @OneToOne
