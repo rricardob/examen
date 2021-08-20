@@ -12,17 +12,17 @@ public class UsuarioRequestDTO {
     private String nombre;
     private String user;
     private String password;
-    private Sucursal sucursal;
+    private String codSucursal;
 
     public UsuarioRequestDTO() {
     }
 
-    public UsuarioRequestDTO(String cod_usuario, String nombre, String user, String password, Sucursal sucursal) {
+    public UsuarioRequestDTO(String cod_usuario, String nombre, String user, String password, String codSucursal) {
         this.cod_usuario = cod_usuario;
         this.nombre = nombre;
         this.user = user;
         this.password = password;
-        this.sucursal = sucursal;
+        this.codSucursal = codSucursal;
     }
 
     public String getCod_usuario() {
@@ -57,11 +57,11 @@ public class UsuarioRequestDTO {
         this.password = password;
     }
 
-    public Sucursal getSucursal() {
-        return sucursal;
+    public String getCodSucursal() {
+        return codSucursal;
     }
 
-    public void setSucursal(Sucursal sucursal) {
-        this.sucursal = sucursal;
+    public void setCodSucursal(String codSucursal) {
+        this.codSucursal = codSucursal;
     }
 }

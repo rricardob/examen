@@ -29,42 +29,53 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    @Transactional
-    public ResponseMessage saveUsuario(UsuarioRequestDTO usuarioRequestDTO) {
-
-        Sucursal sucursal = sucursalRepository.findById(usuarioRequestDTO.getSucursal().getCod_sucursal()).orElse(null);
-
-        /*if (!sucursal.findByCorreo(contactoDTO.getCorreo()).isPresent()) {
-
-            Contacto contacto = new Contacto();
-
-            contacto.setNombre(contactoDTO.getNombre());
-            contacto.setCorreo(contactoDTO.getCorreo());
-            contacto.setTelefono(contactoDTO.getTelefono());
-            contacto.setCelular(contactoDTO.getCelular());
-            contacto.setCargo(contactoDTO.getCargo());
-            contacto.setUnidad(contactoDTO.getUnidad());
-            contacto.setEliminado(false);
-            contacto.setCliente(cliente);
-
-            contacto.setUcreate(UserContextHolder.getUser().getNombres() + UserContextHolder.getUser().getApellidos());
-
-            contactoRepository.save(contacto);*/
-
-
-        //usuarioRepository.save(usuario);
-        return new ResponseMessage(200, "Usuario grabado correctamente");
+    public Usuario findByIdUsuario(String codUsuario) {
+        return usuarioRepository.findById(codUsuario).orElse(null);
     }
 
     @Transactional
-    public ResponseMessage updateUsuario(Usuario usuario) {
-        if (usuarioRepository.findById(usuario.getCod_usuario()).isPresent()) {
+    public ResponseMessage saveUsuario(UsuarioRequestDTO usuarioRequestDTO) {
+
+        Sucursal sucursal = sucursalRepository.findById(usuarioRequestDTO.getCodSucursal()).orElse(null);
+
+        if (sucursal != null) {
+
+            Usuario usuario = new Usuario();
+            usuario.setCod_usuario(usuarioRequestDTO.getCod_usuario());
+            usuario.setNombre(usuarioRequestDTO.getNombre());
+            usuario.setUser(usuarioRequestDTO.getUser());
+            usuario.setPassword(usuarioRequestDTO.getPassword());
+            usuario.setSucursal(sucursal);
 
             usuarioRepository.save(usuario);
-            return new ResponseMessage(200, "Usuario actualizado correctamente");
-
+            return new ResponseMessage(200, "Usuario grabado correctamente");
         } else {
-            return new ResponseMessage(404, "El Usuario "+usuario.getNombre()+" no existe");
+            return new ResponseMessage(200, "La sucursal ingresada no existe");
+        }
+    }
+
+    @Transactional
+    public ResponseMessage updateUsuario(UsuarioRequestDTO usuarioRequestDTO) {
+        if (usuarioRepository.findById(usuarioRequestDTO.getCod_usuario()).isPresent()) {
+
+            Sucursal sucursal = sucursalRepository.findById(usuarioRequestDTO.getCodSucursal()).orElse(null);
+
+            if (sucursal != null) {
+
+                Usuario usuario = new Usuario();
+                usuario.setCod_usuario(usuarioRequestDTO.getCod_usuario());
+                usuario.setNombre(usuarioRequestDTO.getNombre());
+                usuario.setUser(usuarioRequestDTO.getUser());
+                usuario.setPassword(usuarioRequestDTO.getPassword());
+                usuario.setSucursal(sucursal);
+
+                usuarioRepository.save(usuario);
+                return new ResponseMessage(200, "Usuario actualizado correctamente");
+            } else {
+                return new ResponseMessage(200, "La sucursal ingresada no existe");
+            }
+        } else {
+            return new ResponseMessage(404, "El Usuario " + usuarioRequestDTO.getNombre() + " no existe");
         }
     }
 

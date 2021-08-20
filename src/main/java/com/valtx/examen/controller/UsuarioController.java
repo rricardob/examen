@@ -1,5 +1,6 @@
 package com.valtx.examen.controller;
 
+import com.valtx.examen.dto.request.UsuarioRequestDTO;
 import com.valtx.examen.dto.response.ResponseMessage;
 import com.valtx.examen.entity.Sucursal;
 import com.valtx.examen.entity.Usuario;
@@ -27,13 +28,18 @@ public class UsuarioController {
         return ok(usuarioService.listUsuario());
     }
 
-    /*@PostMapping("guardarUsuario")
-    public ResponseEntity<ResponseMessage> guardarUsuario(@RequestBody Usuario usuario){
+    @GetMapping("listarUsuarioById/{codUsuario}")
+    public ResponseEntity<Usuario> findById(@PathVariable String codUsuario) {
+        return ok(usuarioService.findByIdUsuario(codUsuario));
+    }
+
+    @PostMapping("guardarUsuario")
+    public ResponseEntity<ResponseMessage> guardarUsuario(@RequestBody UsuarioRequestDTO usuario){
         return ok(usuarioService.saveUsuario(usuario));
-    }*/
+    }
 
     @PutMapping("actualizarUsuario")
-    public ResponseEntity<ResponseMessage> actualizarUsuario(@RequestBody Usuario usuario){
+    public ResponseEntity<ResponseMessage> actualizarUsuario(@RequestBody UsuarioRequestDTO usuario){
         return ok(usuarioService.updateUsuario(usuario));
     }
 

@@ -27,6 +27,11 @@ public class ProductoController {
         return ok(productoService.listProducto());
     }
 
+    @GetMapping("listarProductoById/{codProducto}")
+    public ResponseEntity<Producto> findById(@PathVariable String codProducto){
+        return ok(productoService.findByIdProducto(codProducto));
+    }
+
     @PostMapping("guardarProducto")
     public ResponseEntity<ResponseMessage> guardarProducto(@RequestBody Producto producto){
         return ok(productoService.saveProducto(producto));

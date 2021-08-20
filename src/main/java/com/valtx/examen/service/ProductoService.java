@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.awt.color.ProfileDataException;
 import java.util.List;
 
 @Service
@@ -21,6 +22,10 @@ public class ProductoService {
 
     public List<Producto> listProducto() {
         return productoRepository.findAll();
+    }
+
+    public Producto findByIdProducto(String codProducto){
+        return productoRepository.findById(codProducto).orElse(null);
     }
 
     @Transactional
